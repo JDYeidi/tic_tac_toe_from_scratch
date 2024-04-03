@@ -33,7 +33,14 @@ class TicTacToe:
 
     def is_valid_move(self, row, col):
         # Check if the move is valid
-        pass
+        if row > 2 or row < 0 or col > 2 or col < 0:
+            return False
+        elif self.board[row][col] != 0:
+            print(self.board[row][col])
+            return False
+        else:
+            return True
+        
 
     def is_winner(self, player):
         # Check if the player has won
@@ -54,19 +61,36 @@ class TicTacToe:
         self.print_board()
         print()
         while True:
-            print("------player one's turn-------")
-            row = int(input("Row: "))
-            column = int(input("Column: "))
-            self.make_move(row, column, self.turn)
-            self.print_board()
-            self.turn = 1
+            if self.turn == 0:
+                print("------player one's turn-------")
+                row = int(input("Row: "))
+                col = int(input("Column: "))
+                if self.is_valid_move(row, col) == True:
+                    self.make_move(row, col, self.turn)
+                    self.turn = 1
+                    self.print_board()
+                    print()
+                else:
+                    print("---Enter a valid movement---")
+                    self.print_board()
+                    print()
 
-            print("------player two's turn-------")
-            row = int(input("Row: "))
-            column = int(input("Column: "))
-            self.make_move(row, column, self.turn)
-            self.print_board()
-            self.turn = 0
+            if self.turn == 1:
+                print("------player two's turn-------")
+                row = int(input("Row: "))
+                col = int(input("Column: "))
+                if self.is_valid_move(row, col) == True:
+                    self.make_move(row, col, self.turn)
+                    self.turn = 0
+                    self.print_board()
+                    print()
+                else:
+                    print("---Enter a valid movement---")
+                    self.print_board()
+                    print()
+            
+            
+            
         
         
 
